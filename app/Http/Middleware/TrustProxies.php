@@ -12,7 +12,9 @@ class TrustProxies extends Middleware
      *
      * @var array|string
      */
-    protected $proxies;
+     
+     /* 旧：protected $proxies; */
+     protected $proxies = '**'; /*Cloud9でHTTPSを使用していることから必要な設定*/
 
     /**
      * The headers that should be used to detect proxies.

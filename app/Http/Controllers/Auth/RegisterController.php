@@ -28,7 +28,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+     
+     /* 新規アカウント作成時、メール送信画面へリダイレクトする */
+     protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.

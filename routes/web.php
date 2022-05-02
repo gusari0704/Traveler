@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['verify' => true]); /* メールでの認証が済んでいない場合はメール送信画面へと遷移 */
