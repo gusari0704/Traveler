@@ -40,11 +40,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group text-center">
                     <button type="submit" class="mt-3 btn samazon-submit-button w-100">
                         ログイン
                     </button>
-
+                    または
+                    <a href="/login/google">
+                        <button type="submit" class="mt-3 btn samazon-submit-button w-100">
+                            Googleでログイン
+                        </button>
+                    </a>
                     <a class="btn btn-link mt-3 d-flex justify-content-center samazon-login-text" href="{{ route('password.request') }}">
                         パスワードを忘れた場合
                     </a>

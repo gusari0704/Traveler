@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-8">
             <h3 class="mt-3 mb-3">新規会員登録</h3>
 
             <hr>
@@ -87,8 +87,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn samazon-submit-button w-100">
-                        アカウント作成
+                    <button type="submit" class="btn samazon-submit-button w-50">
+                        会員登録する
                     </button>
                 </div>
             </form>
