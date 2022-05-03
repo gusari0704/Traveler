@@ -45,11 +45,9 @@
                         ログイン
                     </button>
                     または
-                    <a href="/login/google">
-                        <button type="submit" class="mt-3 btn samazon-submit-button w-100">
-                            Googleでログイン
-                        </button>
-                    </a>
+<a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
+  <i class="fab fa-google mr-1"></i>Googleでログイン
+</a>
                     <a class="btn btn-link mt-3 d-flex justify-content-center samazon-login-text" href="{{ route('password.request') }}">
                         パスワードを忘れた場合
                     </a>

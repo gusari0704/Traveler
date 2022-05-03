@@ -11,13 +11,27 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/* 一番最初に表示されるページへ */
+Route::get('/', 'WebController@index');
+
+Route::get('users/mypage', 'UserController@mypage')->name('mypage');
+Route::get('users/mypage/edit', 'UserController@edit')->name('mypage.edit');
+Route::get('users/mypage/address/edit', 'UserController@edit_address')->name('mypage.edit_address');
+Route::put('users/mypage', 'UserController@update')->name('mypage.update');
+
+/* Googleへのリダイレクト処理 */
+Route::prefix('login')->name('login.')->group(function () {
+    Route::get('/{provider}', 'Auth\LoginController@redirectToProvider')->name('{provider}');
+    Route::get('/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('{provider}.callback');
 });
+Route::prefix('register')->name('register.')->group(function () {
+    Route::get('/{provider}', 'Auth\RegisterController@showProviderUserRegistrationForm')->name('{provider}');
+    Route::post('/{provider}', 'Auth\RegisterController@registerProviderUser')->name('{provider}');
+});
+
+/* メールでの認証が済んでいない場合はメール送信画面へと遷移 */
+Auth::routes(['verify' => true]);
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
-Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
-Auth::routes(['verify' => true]); /* メールでの認証が済んでいない場合はメール送信画面へと遷移 */

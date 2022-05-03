@@ -23,13 +23,21 @@ use App\Notifications\CustomResetPassword;
          $this->notify(new CustomResetPassword($token));
      }
 
+     function IdentityProviders()
+    {
+        // IdentityProviderモデルと紐付ける 1対多の関係
+        return $this->hasMany(IdentityProvider::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+     
+    /* アカウント作成時に入力された内容を自動的に保存する */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'postal_code', 'address', 'phone',
     ];
 
     /**

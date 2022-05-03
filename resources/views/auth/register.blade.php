@@ -90,6 +90,9 @@
                     <button type="submit" class="btn samazon-submit-button w-50">
                         会員登録する
                     </button>
+<a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
+  <i class="fab fa-google mr-1"></i>Googleで登録
+</a>
                 </div>
             </form>
         </div>
