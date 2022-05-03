@@ -15,15 +15,17 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ml-2 mt-3">
                         <div class="d-flex flex-column">
+                            <a href="{{route('mypage.edit')}}">
                             <label for="user-name">会員情報の編集</label>
                             <p>アカウント情報の編集</p>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <a href="{{route('mypage.edit')}}">
+                    
                         <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
+                    
                 </div>
             </div>
         </div>

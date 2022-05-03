@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\User;
 use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
@@ -30,7 +32,7 @@ class LoginController extends Controller
      */
      
     /* ログイン後にトップページへリダイレクトする */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,5 +65,14 @@ class LoginController extends Controller
             'email' => $providerUser->getEmail(),
             'token' => $providerUser->token,
         ]); 
+    }
+    
+    /* 退会済みはログインできなくなる*/
+    protected function authenticated(Request $request, $user)
+    {
+      if($user->deleted_flag) {
+          Auth::logout();
+          return redirect()->route('login')->with('warning', '退会済みのアカウントです！');;
+      }
     }
 }

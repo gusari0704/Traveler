@@ -1,10 +1,9 @@
-<!-- 新規アカウント作成画面のデザイン -->
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <h3 class="mt-3 mb-3">新規会員登録</h3>
 
             <hr>
@@ -90,9 +89,6 @@
                     <button type="submit" class="btn samazon-submit-button w-50">
                         会員登録する
                     </button>
-<a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
-  <i class="fab fa-google mr-1"></i>Googleで登録
-</a>
                 </div>
             </form>
         </div>

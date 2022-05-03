@@ -4,7 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <h3 class="mt-3 mb-3">Travelerへようこそ</h3>
+            <h3 class="mt-3 mb-3">ログイン</h3>
+
+            @if (session('warning'))
+            <div class="alert alert-danger">
+                {{ session('warning') }}
+            </div>
+            @endif
 
             <hr>
             <form method="POST" action="{{ route('login') }}">
@@ -40,14 +46,14 @@
                     </div>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="form-group">
                     <button type="submit" class="mt-3 btn samazon-submit-button w-100">
                         ログイン
                     </button>
                     または
-<a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
-  <i class="fab fa-google mr-1"></i>Googleでログイン
-</a>
+                    <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
+                        <i class="fab fa-google mr-1"></i>Googleでログイン
+                    </a>
                     <a class="btn btn-link mt-3 d-flex justify-content-center samazon-login-text" href="{{ route('password.request') }}">
                         パスワードを忘れた場合
                     </a>
@@ -58,7 +64,7 @@
 
             <div class="form-group">
                 <a class="btn btn-link mt-3 d-flex justify-content-center samazon-login-text" href="{{ route('register') }}">
-                    Travelerを始めて利用する：無料登録
+                    Travelerを初めて利用する場合：無料登録
                 </a>
             </div>
         </div>

@@ -84,3 +84,8 @@
   cursor: pointer;
   cursor: hand;
 }
+
+.samazon-delete-submit-button {
+  border-radius: 2px;
+  background-color: #d94b0e;
+} /*末尾*/
