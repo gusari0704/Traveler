@@ -5,6 +5,21 @@
     <div class="w-50">
         <h1>マイページ</h1>
 
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div class="row">
+                    <div class="col-2 d-flex align-items-center">
+                        <i class="fas fa-user fa-3x"></i>
+                    </div>
+                    <div class="col-9 d-flex align-items-center ml-2 mt-3">
+                        <div class="d-flex flex-column">
+                            <a href="{{route('mypage.form')}}">
+                            <label for="user-name">投稿</label></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr>
 
         <div class="container">
@@ -16,16 +31,10 @@
                     <div class="col-9 d-flex align-items-center ml-2 mt-3">
                         <div class="d-flex flex-column">
                             <a href="{{route('mypage.edit')}}">
-                            <label for="user-name">会員情報の編集</label>
+                            <label for="user-name">会員情報の編集</label></a>
                             <p>アカウント情報の編集</p>
-                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    
                 </div>
             </div>
         </div>
@@ -40,21 +49,16 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ml-2 mt-3">
                         <div class="d-flex flex-column">
-                            <label for="user-name">注文履歴</label>
-                            <p>注文履歴を確認できます</p>
+                            <a href="{{route('mypage')}}"><label for="user-name">投稿履歴</label></a>
+                            <p>投稿履歴を確認できます</p>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <a href="{{route('mypage')}}">
-                        <i class="fas fa-chevron-right fa-2x"></i>
-                    </a>
                 </div>
             </div>
         </div>
 
         <hr>
-
+<!--
         <div class="container">
             <div class="d-flex justify-content-between">
                 <div class="row">
@@ -77,7 +81,6 @@
         </div>
 
         <hr>
-<!--
         <div class="container">
             <div class="d-flex justify-content-between">
                 <div class="row">
@@ -103,7 +106,6 @@
             </div>
         </div>
 -->
-        <hr>
     </div>
 </div>
 @endsection

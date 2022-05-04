@@ -15,10 +15,20 @@
 Route::get('/', 'WebController@index');
 
 Route::get('users/mypage', 'UserController@mypage')->name('mypage');
+Route::get('users/mypage/form', 'UserController@form')->name('mypage.form');
 Route::get('users/mypage/edit', 'UserController@edit')->name('mypage.edit');
 Route::get('users/mypage/address/edit', 'UserController@edit_address')->name('mypage.edit_address');
 Route::put('users/mypage', 'UserController@update')->name('mypage.update');
 Route::delete('users/mypage/delete', 'UserController@destroy')->name('mypage.destroy');/* 退会機能 */
+
+// 投稿ページを表示
+Route::get('/create', 'FormController@postpage');
+// 投稿をコントローラーに送信
+Route::post('/newpostsend', 'FormController@savenew'); 
+// 投稿一覧を表示する
+Route::get('/', 'FormController@index');
+// 投稿を個別に表示する。{id}はデータベースに保存されている投稿のIDの事*/
+Route::get('/show/{id}', 'FormController@show');
 
 /* Googleへのリダイレクト処理 */
 Route::prefix('login')->name('login.')->group(function () {
@@ -32,6 +42,10 @@ Route::prefix('register')->name('register.')->group(function () {
 
 /* メールでの認証が済んでいない場合はメール送信画面へと遷移 */
 Auth::routes(['verify' => true]);
+
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function() {
+    Route::resource('users', 'Dashboard\UserController')->middleware('auth:admins');
+});
 
 Auth::routes();
 

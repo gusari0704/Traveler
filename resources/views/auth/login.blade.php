@@ -46,13 +46,13 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" class="mt-3 btn samazon-submit-button w-100">
+                <div class="form-group text-center">
+                    <button type="submit" class="mt-3 mb-2 btn samazon-submit-button w-50">
                         ログイン
                     </button>
-                    または
-                    <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="btn btn-block btn-danger">
-                        <i class="fab fa-google mr-1"></i>Googleでログイン
+                    <br>または<br>
+                    <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" class="mt-2 btn btn-danger w-50">
+                        Googleでログイン
                     </a>
                     <a class="btn btn-link mt-3 d-flex justify-content-center samazon-login-text" href="{{ route('password.request') }}">
                         パスワードを忘れた場合
@@ -61,7 +61,6 @@
             </form>
 
             <hr>
-
             <div class="form-group">
                 <a class="btn btn-link mt-3 d-flex justify-content-center samazon-login-text" href="{{ route('register') }}">
                     Travelerを初めて利用する場合：無料登録

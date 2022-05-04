@@ -4,22 +4,26 @@
 <div class="row">
 
     <div class="col-9">
-        <h1>おすすめ商品</h1>
         <div class="row">
-            <div class="col-4">
-                <a href="#">
-                    <img src="{{ asset('img/orange.png') }}" class="img-thumbnail">
-                </a>
-                <div class="row">
-                    <div class="col-12">
-                        <p class="samazon-product-label mt-2">
-                            旬のオレンジ詰め合わせ<br>
-                            <label>￥2000</label>
-                        </p>
-                    </div>
-                </div>
+            <div class="col-8">
+                @foreach($data as $datas)
+                  <div class="content">
+                    <h1><a href="/show/{{$datas->id}}">{{$datas->title}}</a></h1>
+                    <hr>
+                    <p>{!! nl2br($datas->main) !!}</p>
+                    <!--もしpublic path(画像の一般公開用URL)に この記事のid番号.jpg が存在するなら、それを表示する-->
+                        @if(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpg'))
+                            <img src="/storage/post_img/{{ $datas->id }}.jpg">
+                        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpeg'))
+                            <img src="/storage/post_img/{{ $datas->id }}.jpeg">
+                        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.png'))
+                            <img src="/storage/post_img/{{ $datas->id }}.png">
+                        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.gif'))
+                            <img src="/storage/post_img/{{ $datas->id }}.gif">
+                        @endif
+                  </div>
+                @endforeach
             </div>
-
         </div>
     </div>
 </div>

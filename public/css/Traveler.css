@@ -89,3 +89,9 @@
   border-radius: 2px;
   background-color: #d94b0e;
 } /*末尾*/
+
+img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+} /*画像をトリミング*/

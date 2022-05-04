@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+      
     public function mypage()
     {
         /* ユーザー自身の情報を$userに保存し、それをビューへと渡しビュー側で表示 */
@@ -15,7 +16,13 @@ class UserController extends Controller
     
         return view('users.mypage', compact('user'));
     }
-    
+
+    public function form()
+    {
+        $user = Auth::user();
+ 
+        return view('users.form', compact('user'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -107,8 +114,8 @@ class UserController extends Controller
     
         return view('users.edit_address', compact('user'));
     }
-
-    /* 退会機能 */
+    
+    /* ユーザー側の退会機能 */
     public function destroy(Request $request)
     {
         $user = Auth::user();

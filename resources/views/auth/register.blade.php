@@ -85,8 +85,8 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn samazon-submit-button w-50">
+                <div class="form-group text-center">
+                    <button type="submit" class="mt-3 btn samazon-submit-button w-50">
                         会員登録する
                     </button>
                 </div>
