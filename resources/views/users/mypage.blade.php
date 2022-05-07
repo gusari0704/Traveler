@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-9 d-flex align-items-center ml-2 mt-3">
                         <div class="d-flex flex-column">
-                            <a href="{{route('mypage')}}"><label for="user-name">投稿履歴</label></a>
+                            <a href="{{route('mypage.history')}}"><label for="user-name">投稿履歴</label></a>
                             <p>投稿履歴を確認できます</p>
                         </div>
                     </div>

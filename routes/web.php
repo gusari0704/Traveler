@@ -17,6 +17,7 @@ Route::get('/', 'WebController@index');
 Route::get('users/mypage', 'UserController@mypage')->name('mypage');
 Route::get('users/mypage/form', 'UserController@form')->name('mypage.form');
 Route::get('users/mypage/edit', 'UserController@edit')->name('mypage.edit');
+Route::get('users/mypage/history', 'UserController@history')->name('mypage.history');
 Route::get('users/mypage/address/edit', 'UserController@edit_address')->name('mypage.edit_address');
 Route::put('users/mypage', 'UserController@update')->name('mypage.update');
 Route::delete('users/mypage/delete', 'UserController@destroy')->name('mypage.destroy');/* 退会機能 */

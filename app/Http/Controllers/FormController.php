@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Form; /* Formモデル（テーブル）を使う */
 
 class FormController extends Controller
@@ -19,7 +20,7 @@ class FormController extends Controller
         $post->title(formsテーブルのtitleカラムに新規で保存する)*/
         $post->title = $request->title;
         $post->main = $request->main;
-     
+        $post->user_id = Auth::id();
         $post->save(); /*データーベースに保存が実行*/
     
         // 画像の保存
