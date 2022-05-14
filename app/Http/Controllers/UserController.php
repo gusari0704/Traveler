@@ -24,11 +24,12 @@ class UserController extends Controller
  
         return view('users.form', compact('user'));
     }
-
+    
+    /*投稿履歴一覧*/
     public function history()
     {
         $user = Auth::user();
-        $data = Form::where('user_id', Auth::id())->get();
+        $data = Form::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return view('users.history', compact('user','data'));
     }
 

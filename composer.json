@@ -13,7 +13,8 @@
         "google/apiclient": "^2.12",
         "laravel/framework": "5.8.*",
         "laravel/socialite": "3.0.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "livewire/livewire": "0.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -2,10 +2,17 @@
 
 @section('content')
 <div class="row">
-
     <div class="col-9">
         <div class="row">
             <div class="col-8">
+                
+                <div>
+                  <form action="/" method="GET">
+                    <input type="text" name="keyword" value="{{ $keyword }}">
+                    <input type="submit" value="検索">
+                  </form>
+                </div>
+                <hr>
                 @foreach($data as $datas)
                   <div class="content">
                     <h1><a href="/show/{{$datas->id}}">{{$datas->title}}</a></h1>

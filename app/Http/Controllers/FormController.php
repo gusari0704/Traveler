@@ -9,7 +9,7 @@ use App\Form; /* Formモデル（テーブル）を使う */
 class FormController extends Controller
 {
     public function postpage (Request $request){
-     return view ('users.form');
+        return view ('users.form');
     }
     
     public function savenew (Request $request){
@@ -36,20 +36,39 @@ class FormController extends Controller
     
     public function index (Request $request){
         
-     /*Form::all(); が、データベースへの問い合わせ文(クエリ)
-     並び順(orderBy)を投稿日(created_at)の降順(desc)にして全て取得(get)*/
-     $data = Form::orderBy('created_at', 'desc')->get(); 
+        $keyword = $request->input('keyword');
+
+        $query = Form::query();
+
+        if(!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('main', 'LIKE', "%{$keyword}%");
+        }
+
+        $data = $query->get();
+
+        return view('web.index', compact('data', 'keyword'));
+        
+        /*Form::all(); が、データベースへの問い合わせ文(クエリ)
+        並び順(orderBy)を投稿日(created_at)の降順(desc)にして全て取得(get)*/
+        $data = Form::orderBy('created_at', 'desc')->get(); 
      
-     /*return view の所でindex.blade.phpが表示されるように指定し、
-       index.bladeに$dataを渡すために、->with(['data' => $data])*/
-     return view('web.index')->with(['data' => $data]);
+        /*return view の所でindex.blade.phpが表示されるように指定し、
+          index.bladeに$dataを渡すために、->with(['data' => $data])*/
+        return view('web.index')->with(['data' => $data]);
     }
     
     /*function show ( )の中にRequest, $requestではなく、今回は
     フォームに入力された値ではなく、URLの{ }の部分(パラメーター)を
     $id(変数)として受け取るので($id)としています。*/
     public function show ($id){
-     $data = Form::where('id', $id)->first();
-     return view('show')->with(['data' => $data]);
+        $data = Form::where('id', $id)->first();
+        return view('show')->with(['data' => $data]);
+    }
+    
+    public function destroy($id){
+        $data = Form::findOrFail($id);
+        $data->delete();
+        return redirect('/');
     }
 }

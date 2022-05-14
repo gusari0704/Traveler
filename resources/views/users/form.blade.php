@@ -19,8 +19,8 @@
         
             <p>&nbsp;</p>
             <p>画像をアップロード</p>
-            <span style="display:block">
-            <input type="file" name="post_img" multiple></span>
+
+            <input type="file" name="post_img"></span>
 
         
             <p>&nbsp;</p>
