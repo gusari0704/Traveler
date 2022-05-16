@@ -18,4 +18,15 @@
                 <img src="/storage/post_img/{{ $data->id }}.gif">
             @endif
     </div>
+
+
+        <form action="comentform" method="post">
+            @csrf
+            <p>&nbsp;</p>
+            <p>コメント</p>
+            <textarea name="text" cols="40" rows="10"></textarea>
+            <input type="hidden" name="form_id" value="{{ $data->id }}">
+            <p>&nbsp;</p>
+            <input type="submit" class="submitbtn">
+        </form>
 @endsection

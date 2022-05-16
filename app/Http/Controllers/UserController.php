@@ -29,7 +29,7 @@ class UserController extends Controller
     public function history()
     {
         $user = Auth::user();
-        $data = Form::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $data = Form::where('user_id', Auth::id())->get();
         return view('users.history', compact('user','data'));
     }
 
@@ -41,7 +41,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        /* ユーザー自身の情報を$userに保存し、それをビューへと渡しビュー側で表示 */
         $user = Auth::user();
  
         return view('users.edit', compact('user'));

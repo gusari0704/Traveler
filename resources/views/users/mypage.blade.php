@@ -11,6 +11,12 @@
                     <div class="col-2 d-flex align-items-center">
                         <i class="fas fa-user fa-3x"></i>
                     </div>
+                        <!--ユーザーアイコン-->
+                        @if($user->image == null)
+                          <img src="/storage/user_img/noimage.png">
+                        @else
+                          <img src="/storage/uerr_img/{{$user->image}}">
+                        @endif
                     <div class="col-9 d-flex align-items-center ml-2 mt-3">
                         <div class="d-flex flex-column">
                             <a href="{{route('mypage.form')}}">

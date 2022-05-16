@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Form; /* Formモデル（テーブル）を使う */
+use App\Coment;
 
 class FormController extends Controller
 {
@@ -34,6 +35,23 @@ class FormController extends Controller
         return redirect ('/'); /*元の投稿フォームのページにリダイレクト*/
     }
     
+    public function comentform (Request $request){
+        
+        $post = new Coment;
+        $post->text = $request->text;
+        $post->user_id = Auth::id();
+        $post->form_id = $request->form_id;
+        $post->save(); /*データーベースに保存が実行*/
+        return redirect ('/');
+    }
+    
+    public function bbs (Request $request){
+        
+        
+        return view('show')->with(['coments' => $coments]);
+    }
+    
+    /*検索機能*/
     public function index (Request $request){
         
         $keyword = $request->input('keyword');
@@ -42,7 +60,7 @@ class FormController extends Controller
 
         if(!empty($keyword)) {
             $query->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('main', 'LIKE', "%{$keyword}%");
+                ->orWhere('main', 'LIKE', "%{$keyword}%"); /*タイトル・本文部分一致*/
         }
 
         $data = $query->get();
@@ -61,14 +79,22 @@ class FormController extends Controller
     /*function show ( )の中にRequest, $requestではなく、今回は
     フォームに入力された値ではなく、URLの{ }の部分(パラメーター)を
     $id(変数)として受け取るので($id)としています。*/
-    public function show ($id){
+    public function show($id){
+        $query = Coment::query();
+        $query->where('form_id', '=', $id);
+        
+        $coments = $query->get();
+        
         $data = Form::where('id', $id)->first();
-        return view('show')->with(['data' => $data]);
+        return view('show')->with(['data' => $data, 'coments' => $coments ]);
     }
     
     public function destroy($id){
-        $data = Form::findOrFail($id);
+        // Formsテーブルから指定のIDのレコード1件を取得
+        $data = Form::find($id);
+        // レコードを削除
         $data->delete();
-        return redirect('/');
+        // 削除したら一覧画面にリダイレクト
+        return redirect ('/');
     }
 }

@@ -11,7 +11,13 @@
             <h1 class="mt-3 mb-3">会員情報の編集</h1>
 
             <hr>
-
+            <!--ユーザーアイコン-->
+            @if($user->image == null)
+              <img src="/storage/user_img/noimage.png">
+            @else
+              <img src="/storage/uerr_img/{{$user->image}}">
+            @endif
+              <hr>
             <form method="POST" action="/users/mypage">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
