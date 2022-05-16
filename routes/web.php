@@ -36,8 +36,6 @@ Route::get('/show/{id}', 'FormController@show');
 
 // 投稿へのコメントをコントローラーに送信
 Route::post('/comentform', 'FormController@comentform'); 
-// コメント一覧を表示する
-Route::get('/show/{id}', 'FormController@bbs');
 
 Route::delete('destroy/{id}', 'FormController@destroy')->name('form.destroy');
 

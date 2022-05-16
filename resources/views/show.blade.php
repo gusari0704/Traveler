@@ -18,9 +18,14 @@
                 <img src="/storage/post_img/{{ $data->id }}.gif">
             @endif
     </div>
+        @foreach($coments as $coment)
+        <div class="content">
+        <hr>
+        <p>{{$coment->text}}</p>
+        </div>
+        @endforeach
 
-
-        <form action="comentform" method="post">
+        <form action="/comentform" method="post">
             @csrf
             <p>&nbsp;</p>
             <p>コメント</p>

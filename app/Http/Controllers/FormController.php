@@ -39,17 +39,12 @@ class FormController extends Controller
         
         $post = new Coment;
         $post->text = $request->text;
-        $post->user_id = Auth::id();
         $post->form_id = $request->form_id;
+        $post->user_id = Auth::id();
         $post->save(); /*データーベースに保存が実行*/
         return redirect ('/');
     }
     
-    public function bbs (Request $request){
-        
-        
-        return view('show')->with(['coments' => $coments]);
-    }
     
     /*検索機能*/
     public function index (Request $request){

@@ -21,7 +21,7 @@
                         @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.gif'))
                             <img src="/storage/post_img/{{ $datas->id }}.gif">
                         @endif
-                            <form action="{{ url('form.destroy', $datas->id) }}" method="post">
+                            <form action="{{ route('form.destroy', $datas->id) }}" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger">削除</button>
