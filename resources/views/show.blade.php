@@ -18,11 +18,23 @@
                 <img src="/storage/post_img/{{ $data->id }}.gif">
             @endif
     </div>
+
         @foreach($coments as $coment)
         <div class="content">
         <hr>
-        <p>{{$coment->text}}</p>
+
+        <p>{{ $coment->text }}</p>
         </div>
+        <form action="{{ route('coment.destroy', $coment->id) }}" method="post">
+            @method('DELETE')
+            @csrf
+            <button type="submit">コメントを削除</button>
+        </form>
+          <p>
+            <a href="{{ route('coment.edit', $comment->id) }}">
+              ［編集］
+            </a>
+          </p>
         @endforeach
 
         <form action="/comentform" method="post">

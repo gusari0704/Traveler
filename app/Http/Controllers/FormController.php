@@ -42,7 +42,7 @@ class FormController extends Controller
         $post->form_id = $request->form_id;
         $post->user_id = Auth::id();
         $post->save(); /*データーベースに保存が実行*/
-        return redirect ('/');
+        return back();
     }
     
     
@@ -74,14 +74,25 @@ class FormController extends Controller
     /*function show ( )の中にRequest, $requestではなく、今回は
     フォームに入力された値ではなく、URLの{ }の部分(パラメーター)を
     $id(変数)として受け取るので($id)としています。*/
-    public function show($id){
+    public function show($id)
+    {
         $query = Coment::query();
         $query->where('form_id', '=', $id);
-        
         $coments = $query->get();
         
         $data = Form::where('id', $id)->first();
         return view('show')->with(['data' => $data, 'coments' => $coments ]);
+    }
+
+    public function edit($id)
+    {
+        $comment = Coment::where('id', '=', $id)->first();
+        
+        if (!$comment) {
+          return redirect('/comments');
+        }
+        return view('comments.edit')    // show 関数との違いはここだけ
+                ->with('comment', $comment);
     }
     
     public function destroy($id){
@@ -89,7 +100,16 @@ class FormController extends Controller
         $data = Form::find($id);
         // レコードを削除
         $data->delete();
-        // 削除したら一覧画面にリダイレクト
-        return redirect ('/');
+        // 削除したら前の画面に戻る
+        return back();
+    }
+
+    public function comentdes($id){
+        // Comentsテーブルから指定のIDのレコード1件を取得
+        $coment = Coment::find($id)->first();
+        // レコードを削除
+        $coment->delete();
+        // 削除したら前の画面に戻る
+        return back();
     }
 }

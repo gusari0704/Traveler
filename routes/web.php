@@ -36,9 +36,18 @@ Route::get('/show/{id}', 'FormController@show');
 
 // 投稿へのコメントをコントローラーに送信
 Route::post('/comentform', 'FormController@comentform'); 
-
+// 投稿を削除する
 Route::delete('destroy/{id}', 'FormController@destroy')->name('form.destroy');
+// コメントを編集する
+Route::get('/comments/{id}/edit', 'FormController@edit')->name('coment.edit');
+// コメントを削除する
+Route::delete('destroy/{id}', 'FormController@comentdes')->name('coment.destroy');
 
+/* いいねボタン
+Route::get('/show/{post}', 'NiceController@show')
+Route::get('/reply/nice/{post}', 'NiceController@nice')->name('nice');
+Route::get('/reply/unnice/{post}', 'NiceController@unnice')->name('unnice');
+*/
 
 /* Googleへのリダイレクト処理 */
 Route::prefix('login')->name('login.')->group(function () {

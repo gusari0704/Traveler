@@ -18,6 +18,7 @@
               <img src="/storage/uerr_img/{{$user->image}}">
             @endif
               <hr>
+              
             <form method="POST" action="/users/mypage">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
@@ -32,7 +33,7 @@
                         <h1 class="samazon-edit-user-info-value">{{ $user->name }}</h1>
                     </div>
                     <div class="collapse editUserName">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus placeholder="侍 太郎">
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus placeholder="山田 太郎">
 
                         <button type="submit" class="btn samazon-submit-button mt-3 w-25">
                             保存
