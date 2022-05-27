@@ -79,20 +79,9 @@ class FormController extends Controller
         $query = Coment::query();
         $query->where('form_id', '=', $id);
         $coments = $query->get();
-        
-        $data = Form::where('id', $id)->first();
-        return view('show')->with(['data' => $data, 'coments' => $coments ]);
-    }
 
-    public function edit($id)
-    {
-        $comment = Coment::where('id', '=', $id)->first();
-        
-        if (!$comment) {
-          return redirect('/comments');
-        }
-        return view('comments.edit')    // show 関数との違いはここだけ
-                ->with('comment', $comment);
+        $data = Form::where('id', $id)->first();
+        return view('show')->with(['data' => $data, 'coments' => $coments, 'user_id' => Auth::id() ]);
     }
     
     public function destroy($id){
@@ -104,12 +93,4 @@ class FormController extends Controller
         return back();
     }
 
-    public function comentdes($id){
-        // Comentsテーブルから指定のIDのレコード1件を取得
-        $coment = Coment::find($id)->first();
-        // レコードを削除
-        $coment->delete();
-        // 削除したら前の画面に戻る
-        return back();
-    }
 }

@@ -24,7 +24,6 @@ Route::get('users/mypage/address/edit', 'UserController@edit_address')->name('my
 Route::put('users/mypage', 'UserController@update')->name('mypage.update');
 Route::delete('users/mypage/delete', 'UserController@destroy')->name('mypage.destroy');/* 退会機能 */
 
-
 // 投稿ページを表示
 Route::get('/create', 'FormController@postpage');
 // 投稿をコントローラーに送信
@@ -32,16 +31,18 @@ Route::post('/newpostsend', 'FormController@savenew');
 // 投稿一覧を表示する
 Route::get('/', 'FormController@index');
 // 投稿を個別に表示する。{id}はデータベースに保存されている投稿のIDの事*/
-Route::get('/show/{id}', 'FormController@show');
+Route::get('/show/{id}', 'FormController@show')->name('form.show');
 
 // 投稿へのコメントをコントローラーに送信
 Route::post('/comentform', 'FormController@comentform'); 
 // 投稿を削除する
 Route::delete('destroy/{id}', 'FormController@destroy')->name('form.destroy');
 // コメントを編集する
-Route::get('/comments/{id}/edit', 'FormController@edit')->name('coment.edit');
+Route::get('/coments/{id}/edit', 'ComentController@edit')->name('coment.edit');
+// コメントを更新
+Route::patch('/coments/', 'ComentController@update')->name('coment.update');
 // コメントを削除する
-Route::delete('destroy/{id}', 'FormController@comentdes')->name('coment.destroy');
+Route::delete('destroy/{id}', 'ComentController@destroy')->name('coment.destroy');
 
 /* いいねボタン
 Route::get('/show/{post}', 'NiceController@show')

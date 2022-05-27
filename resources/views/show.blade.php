@@ -3,8 +3,8 @@
 @section('content')
 <!--個別ページ-->
     <div class="content3">
-        <p class="created">{{$data->created_at}}</p>
-        <h1>{{$data->title}}</h1>
+        <p class="created">{{ $data->created_at }}</p>
+        <h1>{{ $data->title }}</h1>
         <hr>
         <p>{!! nl2br($data->main)!!}</p>
         <!--もしpublic path(画像の一般公開用URL)に この記事のid番号.jpg が存在するなら、それを表示する-->
@@ -25,16 +25,19 @@
 
         <p>{{ $coment->text }}</p>
         </div>
-        <form action="{{ route('coment.destroy', $coment->id) }}" method="post">
-            @method('DELETE')
-            @csrf
-            <button type="submit">コメントを削除</button>
-        </form>
-          <p>
-            <a href="{{ route('coment.edit', $comment->id) }}">
-              ［編集］
-            </a>
-          </p>
+        @if($user_id == $coment->user_id)
+            <form action="{{ route('coment.destroy', $coment->id) }}" method="post">
+                @method('DELETE')
+                @csrf
+                <button type="submit">コメントを削除</button>
+            </form>
+            <p>
+                <a href="{{ route('coment.edit', $coment->id) }}">
+                  ［編集］
+                </a>
+            </p>
+        @endif
+        
         @endforeach
 
         <form action="/comentform" method="post">
