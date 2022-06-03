@@ -3,6 +3,24 @@
 @section('content')
 
 <body>
+    <script>
+        function previewImage(obj)
+        {
+        	var fileReader = new FileReader();
+        	fileReader.onload = (function() {
+        		var canvas = document.getElementById('preview');
+        		var ctx = canvas.getContext('2d');
+        		var image = new Image();
+        		image.src = fileReader.result;
+        		image.onload = (function () {
+        			canvas.width = image.width;
+        			canvas.height = image.height;
+        			ctx.drawImage(image, 0, 0);
+        		});
+        	});
+        	fileReader.readAsDataURL(obj.files[0]);
+        }
+    </script>
     <div class="wrapper">
     <div class="header"><h1>投稿ページ</h1></div>
     <div class="content_wrapper">
@@ -18,14 +36,22 @@
             
             <p>&nbsp;</p>
             <p>本文</p>
-            <textarea name="main" cols="40" rows="10" value={{old('main')}}></textarea>
+            <textarea name="main" cols="40" rows="10" value={{old('main')}} type="text" placeholder="フリーコメント"></textarea>
             @error('main')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
-            
+<!--
+            <p>&nbsp;</p>
+            <p>タグ</p>
+            <textarea name="tag" cols="20" rows="1" value="" type="text" placeholder="＃タグを追加する"></textarea>
+-->
+            <p>
+            Preview:<br>
+            <canvas id="preview" style="max-width:200px;"></canvas>
+            </p>
             <p>&nbsp;</p>
             <p>画像をアップロード</p>
-            <input type="file" name="post_img"></span>
+            <input type="file" name="post_img" onchange="previewImage(this);"></span>
             <p>&nbsp;</p>
             <input type="submit" class="submitbtn">
         </form>
