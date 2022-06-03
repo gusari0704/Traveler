@@ -185,8 +185,8 @@ img {
 
 /* 個別の投稿ページ */
 .content3 img {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 50%;
+    max-height: 50%;
 }
 
 #lightbox img {

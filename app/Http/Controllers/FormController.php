@@ -17,7 +17,7 @@ class FormController extends Controller
         return view ('users.form');
     }
 
-    public function savenew (Request $request)
+    public function savenew (FormsRequest $request)
     {
         $post = new Form; /*formsテーブルに新規で書き込むためnewと宣言している*/
      

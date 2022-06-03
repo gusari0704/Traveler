@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\FormsRequest;
+use App\Http\Requests\CommentFormRequest;
 use App\Form;
 use App\Coment;
 
@@ -15,7 +15,7 @@ class ComentController extends Controller
     }
     
     /* 投稿へのコメントを送信する */
-    public function comentform (Request $request)
+    public function comentform (CommentFormRequest $request)
     {
         $post = new Coment;
         $post->text = $request->text;

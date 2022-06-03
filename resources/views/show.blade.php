@@ -44,7 +44,7 @@
             @csrf
             <p>&nbsp;</p>
             <p>コメント</p>
-            <textarea name="text" cols="40" rows="5" value={{old('text')}}></textarea>
+            <textarea name="text" cols="40" rows="5" value={{old('text')}} type="text" placeholder="コメントを入力"></textarea>
             @error('text')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
