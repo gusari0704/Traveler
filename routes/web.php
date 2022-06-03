@@ -32,23 +32,17 @@ Route::post('/newpostsend', 'FormController@savenew');
 Route::get('/', 'FormController@index');
 // 投稿を個別に表示する。{id}はデータベースに保存されている投稿のIDの事*/
 Route::get('/show/{id}', 'FormController@show')->name('form.show');
-
-// 投稿へのコメントをコントローラーに送信
-Route::post('/comentform', 'FormController@comentform'); 
 // 投稿を削除する
 Route::delete('destroy/{id}', 'FormController@destroy')->name('form.destroy');
+
+// 投稿へのコメントをコントローラーに送信
+Route::post('/comentform', 'ComentController@comentform'); 
 // コメントを編集する
 Route::get('/coments/{id}/edit', 'ComentController@edit')->name('coment.edit');
 // コメントを更新
 Route::patch('/coments/', 'ComentController@update')->name('coment.update');
 // コメントを削除する
-Route::delete('destroy/{id}', 'ComentController@destroy')->name('coment.destroy');
-
-/* いいねボタン
-Route::get('/show/{post}', 'NiceController@show')
-Route::get('/reply/nice/{post}', 'NiceController@nice')->name('nice');
-Route::get('/reply/unnice/{post}', 'NiceController@unnice')->name('unnice');
-*/
+Route::delete('destroy/{id}/coment', 'ComentController@destroy')->name('coment.destroy');
 
 /* Googleへのリダイレクト処理 */
 Route::prefix('login')->name('login.')->group(function () {

@@ -9,7 +9,10 @@ use App\Form;
 
 class UserController extends Controller
 {
-      
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function mypage()
     {
         /* ユーザー自身の情報を$userに保存し、それをビューへと渡しビュー側で表示 */

@@ -9,14 +9,15 @@
         <p>{!! nl2br($data->main)!!}</p>
         <!--もしpublic path(画像の一般公開用URL)に この記事のid番号.jpg が存在するなら、それを表示する-->
             @if(file_exists(public_path().'/storage/post_img/'. $data->id .'.jpg'))
-                <img src="/storage/post_img/{{ $data->id }}.jpg">
+                <a href="/storage/post_img/{{ $data->id }}.jpg" data-lightbox="abc" data-title="{{ $data->title }}"><img src="/storage/post_img/{{ $data->id }}.jpg"></a>
             @elseif(file_exists(public_path().'/storage/post_img/'. $data->id .'.jpeg'))
-                <img src="/storage/post_img/{{ $data->id }}.jpeg">
+                <a href="/storage/post_img/{{ $data->id }}.jpeg" data-lightbox="abc" data-title="{{ $data->title }}"><img src="/storage/post_img/{{ $data->id }}.jpeg"></a>
             @elseif(file_exists(public_path().'/storage/post_img/'. $data->id .'.png'))
-                <img src="/storage/post_img/{{ $data->id }}.png">
+                <a href="/storage/post_img/{{ $data->id }}.png" data-lightbox="abc" data-title="{{ $data->title }}"><img src="/storage/post_img/{{ $data->id }}.png"></a>
             @elseif(file_exists(public_path().'/storage/post_img/'. $data->id .'.gif'))
-                <img src="/storage/post_img/{{ $data->id }}.gif">
+                <a href="/storage/post_img/{{ $data->id }}.gif" data-lightbox="abc" data-title="{{ $data->title }}"><img src="/storage/post_img/{{ $data->id }}.gif"></a>
             @endif
+        
     </div>
 
         @foreach($coments as $coment)
@@ -37,14 +38,17 @@
                 </a>
             </p>
         @endif
-        
         @endforeach
 
         <form action="/comentform" method="post">
             @csrf
             <p>&nbsp;</p>
             <p>コメント</p>
-            <textarea name="text" cols="40" rows="10"></textarea>
+            <textarea name="text" cols="40" rows="5" value={{old('text')}}></textarea>
+            @error('text')
+            <p class="perror"><span style="color:red;">{{ $message }}</span></p>
+            @enderror
+            
             <input type="hidden" name="form_id" value="{{ $data->id }}">
             <p>&nbsp;</p>
             <input type="submit" class="submitbtn">

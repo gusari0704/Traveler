@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Nice;
+use App\Post;
+use App\Nice;
 use Illuminate\Support\Facades\Auth;
 
 class NiceController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function nice(Post $post, Request $request)
     {
-        $nice = New Nice();
+        $nice=New Nice();
         $nice->post_id = $post->id;
         $nice->user_id = Auth::user()->id;
         $nice->save();

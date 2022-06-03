@@ -91,7 +91,108 @@
 } /*末尾*/
 
 img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-} /*画像をトリミング*/
+    width: 80%;
+    height: 80%;
+}
+
+/*================
+ PC用のスタイル
+=================*/
+@media screen and (min-width: 768px) {
+   /* PC用カルーセル設定 */
+   .carousel {
+     width: 885px;
+     margin-left: 20px;
+   }
+ 
+   .carouselImg {
+     width: 885px;
+   }
+   
+  /* 横幅設定 */
+  body {
+    max-width: 1080px;
+    min-width: 900px; /*← bodyの横幅は最小900px*/
+    margin: 0 auto 0 auto;
+  }
+
+/* ヘッダー */
+
+
+/* トップページ */
+.top_content {
+    position: relative;
+    border-radius: 50px;
+}
+
+.top_content form {/*aタグを画像の真ん中に*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.top_content img {
+    width: 100%;
+    height: 350px;
+    padding: 0px 150px;
+    margin: 20px 0;
+    border-radius: 50px;
+    opacity: 0.6;
+    filter: brightness(110%);
+}
+
+/* 投稿一覧 */
+.form_container {
+    display: flex;
+    flex-wrap: wrap; /* 折り返す */
+}
+
+.form_img {
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+    background: #000;
+    overflow: hidden;
+    transition: 0.5s;
+    border-radius: 30px;
+}
+
+.form_img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    border-radius: 30px;
+    object-fit: cover;
+    cursor: pointer;
+    border: solid 2px #000;
+}
+
+.form_img a:hover img {
+  opacity: 0.7;
+  transform: scale(1.2, 1.2);
+}
+
+/* マイページ */
+#user_img img {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+}
+
+/* 個別の投稿ページ */
+.content3 img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+#lightbox img {
+    width: 100%;
+    height: 100%;
+}
+
+}
+

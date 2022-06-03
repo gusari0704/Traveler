@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\FormsRequest;
 use App\Form; /* Formモデル（テーブル）を使う */
 use App\Coment;
 
+
 class FormController extends Controller
 {
-    public function postpage (Request $request){
+
+    public function postpage (Request $request)
+    {
         return view ('users.form');
     }
-    
-    public function savenew (Request $request){
-        
+
+    public function savenew (Request $request)
+    {
         $post = new Form; /*formsテーブルに新規で書き込むためnewと宣言している*/
      
         /*$request->title(フォームで送信されたタイトル)を、
@@ -27,28 +31,23 @@ class FormController extends Controller
         // 画像の保存
         if($request->post_img){
 
-            if($request->post_img->extension() == 'gif' || $request->post_img->extension() == 'jpeg' || $request->post_img->extension() == 'jpg' || $request->post_img->extension() == 'png'){
-            $request->file('post_img')->storeAs('public/post_img', $post->id.'.'.$request->post_img->extension());
+            if($request->post_img->extension() == 'gif' 
+            || $request->post_img->extension() == 'jpeg' 
+            || $request->post_img->extension() == 'jpg' 
+            || $request->post_img->extension() == 'png')
+            {
+                
+            // 投稿された時のみ、画像以外の拡張子の場合は保存しない
+            $request->file('post_img')
+            ->storeAs('public/post_img', $post->id.'.'.$request->post_img->extension());
             }
-
         }
-        return redirect ('/'); /*元の投稿フォームのページにリダイレクト*/
+        return view('users.form'); /*元の投稿フォームのページにリダイレクト*/
     }
-    
-    public function comentform (Request $request){
-        
-        $post = new Coment;
-        $post->text = $request->text;
-        $post->form_id = $request->form_id;
-        $post->user_id = Auth::id();
-        $post->save(); /*データーベースに保存が実行*/
-        return back();
-    }
-    
     
     /*検索機能*/
-    public function index (Request $request){
-        
+    public function index (Request $request)
+    {
         $keyword = $request->input('keyword');
 
         $query = Form::query();
@@ -84,7 +83,8 @@ class FormController extends Controller
         return view('show')->with(['data' => $data, 'coments' => $coments, 'user_id' => Auth::id() ]);
     }
     
-    public function destroy($id){
+    public function destroy($id)
+    {
         // Formsテーブルから指定のIDのレコード1件を取得
         $data = Form::find($id);
         // レコードを削除

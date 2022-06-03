@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Nice extends Model
 {
     public function user() {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('app\User');
     }
  
     public function post() {
-        return $this->belongsTo('App\Models\Post');
+        return $this->belongsTo('app\Post');
     }
 }

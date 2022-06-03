@@ -12,13 +12,14 @@
 
             <hr>
             <!--ユーザーアイコン-->
+            <div id="user_img">
             @if($user->image == null)
               <img src="/storage/user_img/noimage.png">
             @else
               <img src="/storage/uerr_img/{{$user->image}}">
             @endif
               <hr>
-              
+            </div>
             <form method="POST" action="/users/mypage">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">

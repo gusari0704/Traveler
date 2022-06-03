@@ -1,37 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-9">
-        <div class="row">
-            <div class="col-8">
-                
-                <div>
-                  <form action="/" method="GET">
-                    <input type="text" name="keyword" value="{{ $keyword }}">
-                    <input type="submit" value="検索">
-                  </form>
-                </div>
-                <hr>
-                @foreach($data as $datas)
-                  <div class="content">
-                    <h1><a href="/show/{{$datas->id}}">{{$datas->title}}</a></h1>
-                    <hr>
-                    <p>{!! nl2br($datas->main) !!}</p>
-                    <!--もしpublic path(画像の一般公開用URL)に この記事のid番号.jpg が存在するなら、それを表示する-->
-                        @if(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpg'))
-                            <img src="/storage/post_img/{{ $datas->id }}.jpg">
-                        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpeg'))
-                            <img src="/storage/post_img/{{ $datas->id }}.jpeg">
-                        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.png'))
-                            <img src="/storage/post_img/{{ $datas->id }}.png">
-                        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.gif'))
-                            <img src="/storage/post_img/{{ $datas->id }}.gif">
-                        @endif
-                  </div>
-                @endforeach
-            </div>
+<div id="top_block">
+    <div class="top_content">
+        <div class="top">
+            <img src="/storage/image/top_ground.jpg">
+            <form action="/" method="GET">
+                <input type="text" name="keyword" value="{{ $keyword }}">
+                <input type="submit" value="検索">
+            </form>
         </div>
     </div>
+</div>
+<hr>
+みんなの旅ログ
+<hr>
+<div class="form_container">
+    @foreach($data as $datas)
+    <!--もしpublic path(画像の一般公開用URL)に この記事のid番号.jpg が存在するなら、それを表示する-->
+        @if(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpg'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.jpg"></a></div>
+        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpeg'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.jpeg"></a></div>
+        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.png'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.png"></a></div>
+        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.gif'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.gif"></a></div>
+        @endif
+        @endforeach
 </div>
 @endsection

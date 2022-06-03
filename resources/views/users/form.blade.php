@@ -11,17 +11,21 @@
         <form action="/newpostsend" method="post" enctype="multipart/form-data">
             @csrf
             <p>タイトル</p>
-            <input type="text" name="title" class="formtitle">
-        
+            <input type="text" name="title" class="formtitle" value={{old('title')}}>
+            @error('title')
+            <p class="perror"><span style="color:red;">{{ $message }}</span></p>
+            @enderror
+            
             <p>&nbsp;</p>
             <p>本文</p>
-            <textarea name="main" cols="40" rows="10"></textarea>
-        
+            <textarea name="main" cols="40" rows="10" value={{old('main')}}></textarea>
+            @error('main')
+            <p class="perror"><span style="color:red;">{{ $message }}</span></p>
+            @enderror
+            
             <p>&nbsp;</p>
             <p>画像をアップロード</p>
             <input type="file" name="post_img"></span>
-
-        
             <p>&nbsp;</p>
             <input type="submit" class="submitbtn">
         </form>

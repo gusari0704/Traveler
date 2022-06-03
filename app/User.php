@@ -8,11 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 /* アカウント作成時、パスワード再発行時に日本語される */
 use App\Notifications\CustomVerifyEmail;
 use App\Notifications\CustomResetPassword;
+use Overtrue\LaravelFavorite\Traits\Favoriter;
 
 /*アカウント作成時にメールが送信される*/
   class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, Favoriter;
+    
     /* アカウント作成時の日本語化 */
      public function sendEmailVerificationNotification()
      {
@@ -59,10 +61,10 @@ use App\Notifications\CustomResetPassword;
     ];
 
     public function posts() {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('app\Post');
     }
 
     public function nices() {
-        return $this->hasMany('App\Models\Nice');
+        return $this->hasMany('app\Nice');
     }
 }
