@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+@auth
 <div id="top_block">
     <div class="top_content">
         <div class="top">
@@ -29,4 +31,51 @@
         @endif
         @endforeach
 </div>
+
+@else
+<main>
+    <article>
+        <section>
+       <!-- カルーセル -->
+       <div class="carousel slide" id="sample" data-ride="carousel">
+           <ol class="carousel-indicators">
+                <li data-target="#sample" data-slide-to="0" class="active"></li>
+                <li data-target="#sample" data-slide-to="1"></li>
+                <li data-target="#sample" data-slide-to="2"></li>
+           </ol>
+           <div class="carousel-item active">
+             <img class="d-block w-100" src="/storage/image/carousel1.png">
+             <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+             </div>
+           </div>
+           <div class="carousel-item">
+             <img class="d-block w-100" src="/storage/image/carousel2.png">
+             <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+             </div>
+           </div>
+           <div class="carousel-item">
+             <img class="d-block w-100" src="/storage/image/carousel3.png">
+             <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+             </div>
+           </div>
+           <a href="#sample" class="carousel-control-prev" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="sr-only">前の画像へ</span>
+            </a>
+            <a href="#sample" class="carousel-control-next" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="sr-only">次の画像へ</span>
+            </a>
+        </div>
+       </section>
+    </article>
+</main>
+@endauth
+
 @endsection

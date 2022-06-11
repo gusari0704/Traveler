@@ -194,5 +194,21 @@ img {
     height: 100%;
 }
 
+/* マップボックス設定 */
+.geocoder {
+    position: absolute;
+    z-index: 1;
+    width: 50%;
+    left: 50%;
+    margin-left: -25%;
+    top: 800px;
+}
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+#map {
+    margin-top: 75px;
+}
+
 }
 
