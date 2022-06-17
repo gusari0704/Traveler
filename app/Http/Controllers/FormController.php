@@ -75,6 +75,20 @@ class FormController extends Controller
         return view('web.index')->with(['data' => $data]);
     }
     
+     public function favorite(Form $form)
+     {
+         $user = Auth::user();
+
+         if ($user->hasFavorited($form)) {
+             $user->unfavorite($form);
+         } else {
+            // $user->favorite($form);
+            $user->unfavorite($form);
+         }
+ 
+         return redirect()->route('form.show', ['id' => $form->id]); 
+     }
+    
     /*function show ( )の中にRequest, $requestではなく、今回は
     フォームに入力された値ではなく、URLの{ }の部分(パラメーター)を
     $id(変数)として受け取るので($id)としています。*/

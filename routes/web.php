@@ -34,12 +34,7 @@ Route::get('/show/{id}', 'FormController@show')->name('form.show');
 // 投稿を削除する
 Route::delete('destroy/{id}', 'FormController@destroy')->name('form.destroy');
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('/favorites', FavoriteController::class);
-    Route::post('/favorites/{id}/bookmark', [BookmarkController::class, 'store'])->name('bookmark.store');
-    Route::delete('/favorites/{id}/unbookmark', [BookmarkController::class, 'destroy'])->name('bookmark.destroy');
-    Route::get('/bookmarks', [FavoriteController::class, 'bookmark_Favorites'])->name('bookmarks');
-});
+Route::get('/{form}/favorite', 'FormController@favorite')->name('form.favorite');
 
 // 投稿へのコメントをコントローラーに送信
 Route::post('/comentform', 'ComentController@comentform'); 

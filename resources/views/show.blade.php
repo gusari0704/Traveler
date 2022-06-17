@@ -60,22 +60,17 @@
 </main>
     <hr>
     <!--ブックマーク-->
-    @foreach($favorites as $favorite)
-    <div>
-        @if(!Auth::user()->is_bookmark($favorite->id))
-        <form action="{{ route('bookmark.store', $favorite->id) }}" method="POST">
-            @csrf
-            <button>お気に入り登録</button>
-       </form>
-        @else
-        <form action="{{ route('bookmark.destroy', $favorite->id) }}" method="POST">
-            @csrf
-            @method('delete')
-            <button>お気に入り解除</button>
-        </form>
-        @endif
-    </div>
-    @endforeach
+     @if($data->isFavoritedBy(Auth::user()))
+     <a href="/{{ $data->id }}/favorite" class="btn samazon-favorite-button text-favorite w-100">
+         <i class="fa fa-heart"></i>
+         お気に入り解除
+     </a>
+     @else
+     <a href="/{{ $data->id }}/favorite" class="btn samazon-favorite-button text-favorite w-100">
+         <i class="fa fa-heart"></i>
+         お気に入り
+     </a>
+     @endif
     <hr>
     
         <!--写真の位置情報-->
