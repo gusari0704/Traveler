@@ -3,6 +3,7 @@
 @section('content')
 
 @auth
+<div class="wrapper02">
 <div id="top_block">
     <div class="top_content">
         <div class="top">
@@ -14,8 +15,7 @@
         </div>
     </div>
 </div>
-<hr>
-<h4>みんなの旅ログ</h4>
+
 <hr>
 <div class="form_container">
     @foreach($data as $datas)

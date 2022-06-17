@@ -114,6 +114,7 @@ img {
     max-width: 1080px;
     min-width: 900px; /*← bodyの横幅は最小900px*/
     margin: 0 auto 0 auto;
+    background-color: #fff;
   }
 
 /* ヘッダー */
@@ -151,8 +152,8 @@ img {
 }
 
 .form_img {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     margin: 10px;
     background: #000;
     overflow: hidden;
@@ -176,18 +177,151 @@ img {
   transform: scale(1.2, 1.2);
 }
 
+/* 投稿履歴 */
+.overflow-ellipsis {
+    font-weight: 600;
+    text-align: center;
+    font-size: 20px;
+    width: 200px;
+    background-color: #fff;
+    margin: 0px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* マイページ */
+.wrapper {
+    padding: 130px 30px 0 30px;
+}
+
 #user_img img {
     width: 130px;
     height: 130px;
     margin: 0 auto;
 }
 
-/* 個別の投稿ページ */
-.content3 img {
-    max-width: 50%;
-    max-height: 50%;
+header {
+  position: fixed;
+  z-index: 999;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  padding: 10px 40px;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
+header .inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.logo {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  font-weight: bold;
+}
+
+/* header-navi */
+header .navi {
+  margin: 0 auto;
+  padding: 0;
+  font-size: 15px;
+
+  display: flex;
+  list-style: none;
+}
+header .navi li {
+  margin: 0 0 5px 40px;
+}
+header .navi li:first-child {
+  margin-left: 0;
+}
+header .navi li a {
+  display: block;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #333;
+}
+header .navi li a:hover {
+  color: #333;
+}
+
+.textlink a {
+	position: relative;
+	color: #333;
+	text-decoration: none;
+}
+.textlink a:hover {
+	color: #b99b00;
+}
+
+.textlink02 a::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: #333;
+	transition: width 0.3s;
+}
+
+.textlink02 a:hover::after {
+	width: 100%;
+}
+
+.textlink02a a {
+	background: linear-gradient(transparent 90%, #333 90%);
+}
+
+.textlink02a a::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+}
+
+
+/* 個別の投稿ページ */
+.wrapper02 {
+    padding: 80px 30px 0 30px;
+}
+
+.content_flex {
+    display: grid; /* グリッドレイアウト */
+    grid-template-rows: 100% 1fr;
+    grid-template-columns: 550px 1fr;
+}
+
+.content3 {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    /*background: #f88;*/
+    text-align: center;
+}
+
+.content3 img {
+    width: auto;
+    height: auto;
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 20px;
+}
+
+.content3_grid {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    /*background: #8f8;*/
+    padding: 10px;
+}
+
 
 #lightbox img {
     width: 100%;
@@ -207,8 +341,12 @@ img {
     min-width: 100%;
 }
 #map {
-    margin-top: 75px;
+    margin: 30px auto 0px auto;
+    width: 450px;
+    height: 300px;
+    border-radius: 20px;
 }
+
 
 }
 

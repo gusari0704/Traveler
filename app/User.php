@@ -60,11 +60,8 @@ use Overtrue\LaravelFavorite\Traits\Favoriter;
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts() {
-        return $this->hasMany('app\Post');
-    }
-
-    public function nices() {
-        return $this->hasMany('app\Nice');
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Form')->withTimestamps();
     }
 }

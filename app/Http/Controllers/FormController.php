@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\FormsRequest;
 use App\Form; /* Formモデル（テーブル）を使う */
 use App\Coment;
+use App\Bookmark;
 
 
 class FormController extends Controller
 {
-
     public function postpage (Request $request)
     {
         return view ('users.form');
@@ -26,6 +26,11 @@ class FormController extends Controller
         $post->title = $request->title;
         $post->main = $request->main;
         $post->user_id = Auth::id();
+        $post->lat = $request->lat;
+        $post->lon = $request->lon;
+        $post->address = $request->address;
+        $post->spot_name = $request->spot_name;
+        
         $post->save(); /*データーベースに保存が実行*/
     
         // 画像の保存
@@ -80,7 +85,12 @@ class FormController extends Controller
         $coments = $query->get();
 
         $data = Form::where('id', $id)->first();
-        return view('show')->with(['data' => $data, 'coments' => $coments, 'user_id' => Auth::id() ]);
+        
+        $query = Bookmark::query();
+        $query->where('form_id', '=', $id);
+        $favorites = $query->get();
+        
+        return view('show')->with(['data'=>$data, 'coments'=>$coments, 'user_id'=>Auth::id(), 'favorites'=>$favorites ]);
     }
     
     public function destroy($id)

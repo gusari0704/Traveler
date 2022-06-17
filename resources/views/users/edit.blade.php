@@ -1,25 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<header id="header">
+  <div class="inner">
+    <ul class="navi">
+          <li class="textlink textlink02"><a href="{{route('mypage.form')}}">投稿</a></li>
+          <li class="textlink textlink02"><a href="{{route('mypage.history')}}">投稿履歴</a></li>
+          <li class="textlink textlink02"><a href="">お気に入り</a></li>
+          <li class="textlink02a"><a href="{{route('mypage.edit')}}">会員情報</a></li>
+    </ul>
+  </div>
+</header>
+<div class="wrapper">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <span>
-                <a href="{{ route('mypage') }}">マイページ</a> > 会員情報の編集
-            </span>
-
-            <h1 class="mt-3 mb-3">会員情報の編集</h1>
-
-            <hr>
-            <!--ユーザーアイコン-->
-            <div id="user_img">
-            @if($user->image == null)
-              <img src="/storage/user_img/noimage.png">
-            @else
-              <img src="/storage/uerr_img/{{$user->image}}">
-            @endif
-              <hr>
-            </div>
             <form method="POST" action="/users/mypage">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
@@ -35,11 +30,9 @@
                     </div>
                     <div class="collapse editUserName">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus placeholder="山田 太郎">
-
                         <button type="submit" class="btn samazon-submit-button mt-3 w-25">
                             保存
                         </button>
-
                         @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>氏名を入力してください</strong>
@@ -47,9 +40,7 @@
                         @enderror
                     </div>
                 </div>
-
                 <hr>
-
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <label for="email" class="text-md-left samazon-edit-user-info-label">メールアドレス</label>
@@ -66,7 +57,6 @@
                         <button type="submit" class="btn samazon-submit-button mt-3 w-25">
                             保存
                         </button>
-
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>メールアドレスを入力してください</strong>
@@ -74,9 +64,7 @@
                         @enderror
                     </div>
                 </div>
-
                 <hr>
-
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <label for="phone" class="text-md-left samazon-edit-user-info-label">電話番号</label>
@@ -89,11 +77,9 @@
                     </div>
                     <div class="collapse editUserPhone">
                         <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" required autocomplete="phone" autofocus placeholder="XXX-XXXX-XXXX">
-
                         <button type="submit" class="btn samazon-submit-button mt-3 w-25">
                             保存
                         </button>
-
                         @error('phone')
                         <span class="invalid-feedback" role="alert">
                             <strong>電話番号を入力してください</strong>
@@ -101,7 +87,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <hr>
             </form>
             <div class="d-flex justify-content-end">
@@ -109,7 +94,6 @@
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <div class="btn dashboard-delete-link" data-toggle="modal" data-target="#delete-user-confirm-modal">退会する</div>
- 
                     <div class="modal fade" id="delete-user-confirm-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -120,7 +104,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p class="text-center">一度退会するとデータはすべて削除され復旧はできません。</p>
+                                    <p class="text-center">一度退会するとデータはすべて削除され、復旧はできません。</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn dashboard-delete-link" data-dismiss="modal">キャンセル</button>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FormsFormRequest extends FormRequest
+class FormsRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,7 +15,8 @@ class FormsFormRequest extends FormRequest
     {
         return [
             // 必須、空欄OK、特殊記号禁止
-            'text' => 'required|nullable|regex:/^[^#<>^;_]*$/',
+            'title' => 'required|nullable|regex:/^[^#<>^;_]*$/',
+            'main' => 'nullable|regex:/^[^#<>^;_]*$/',
 
         ];
     }
@@ -23,8 +24,9 @@ class FormsFormRequest extends FormRequest
     public function messages()
     {
         return[
-            'text.regex' => '使用禁止記号#<>^;_を消してください',
-            'text.required' =>'必須 (required)',
+            'title.regex' => '使用禁止記号#<>^;_を消してください',
+            'title.required' =>'必須 (required)',
+            'main.regex' => '使用禁止記号#<>^;_を消してください',
         ];
     }
 }

@@ -1,68 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center mt-3">
-    <div class="w-50">
-        <div class="container">
-            <div class="d-flex justify-content-between">
-                <div class="row">
-                    <div class="col-2 d-flex align-items-center">
-                       
-                    </div>
-<!--
-                    <div id="user_img">
-                        @if($user->image == null)
-                          <img src="/storage/user_img/noimage.png">
-                        @else
-                          <img src="/storage/uerr_img/{{ $user->image }}">
-                        @endif
-                    </div>
--->
-                    <div class="col-9 d-flex align-items-center ml-2 mt-3">
-                        <div class="d-flex flex-column">
-                            <a href="{{route('mypage.form')}}">
-                            <label for="user-name">投稿</label></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-
-        <div class="container">
-            <div class="d-flex justify-content-between">
-                <div class="row">
-                    <div class="col-2 d-flex align-items-center">
-                    </div>
-                    <div class="col-9 d-flex align-items-center ml-2 mt-3">
-                        <div class="d-flex flex-column">
-                            <a href="{{route('mypage.edit')}}">
-                            <label for="user-name">会員情報の編集</label></a>
-                            <p>アカウント情報の編集</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="container">
-            <div class="d-flex justify-content-between">
-                <div class="row">
-                    <div class="col-2 d-flex align-items-center">
-                    </div>
-                    <div class="col-9 d-flex align-items-center ml-2 mt-3">
-                        <div class="d-flex flex-column">
-                            <a href="{{route('mypage.history')}}"><label for="user-name">投稿履歴</label></a>
-                            <p>投稿履歴を確認できます</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr>
+<header id="header">
+  <div class="inner">
+    <ul class="navi">
+          <li class="textlink textlink02"><a href="{{route('mypage.form')}}">投稿</a></li>
+          <li class="textlink textlink02"><a href="{{route('mypage.history')}}">投稿履歴</a></li>
+          <li class="textlink textlink02"><a href="">お気に入り</a></li>
+          <li class="textlink textlink02"><a href="{{route('mypage.edit')}}">会員情報</a></li>
+    </ul>
+  </div>
+</header>
 <!--
         <div class="container">
             <div class="d-flex justify-content-between">
@@ -111,6 +59,5 @@
             </div>
         </div>
 -->
-    </div>
-</div>
+
 @endsection

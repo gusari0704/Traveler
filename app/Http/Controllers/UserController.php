@@ -67,7 +67,7 @@ class UserController extends Controller
         $user->phone = $request->input('phone') ? $request->input('phone') : $user->phone;
         $user->update();
         
-        return redirect()->route('mypage');
+        return redirect()->route('mypage.edit');
     }
 
     /**
