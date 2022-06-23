@@ -16,28 +16,28 @@
     <div class="wrapper">
     <div class="content_wrapper">
     <div class="content2">
+        <main class="content4_flex">
+        <div class="content4">
         <!--投稿フォーム-->
         <form action="/newpostsend" method="post" enctype="multipart/form-data">
             @csrf
-            <p>タイトル</p>
-            <input type="text" cols="25" name="title" class="formtitle" value={{old('title')}}>
+            <input type="text" cols="30" name="title" class="formtitle" placeholder="タイトル" value={{old('title')}}>
             @error('title')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
             
             <p>&nbsp;</p>
-            <textarea name="main" cols="25" rows="5" type="text" placeholder="フリーコメント" value={{old('main')}}></textarea>
+            <textarea name="main" cols="30" rows="3" type="text" placeholder="フリーコメント" value={{old('main')}}></textarea>
             @error('main')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
 
             <p>&nbsp;</p>
-            <p>名称</p>
-            <textarea name="spot_name" cols="25" rows="1" value="" type="text" placeholder="例：東京博物館"></textarea>
+            <textarea name="spot_name" cols="30" rows="1" value="" type="text" placeholder="名称・地名（例：東京博物館）" value={{old('spot_name')}}></textarea>
 
             <p>
             Preview:<br>
-            <canvas id="preview" style="max-width:200px;"></canvas>
+            <canvas id="preview" style="max-width:150px; max-height:200px;"></canvas>
             </p>
             <script>
                 function previewImage(obj) //プレビュー
@@ -67,7 +67,9 @@
             <input type="hidden" id="lon" name="lon" value="">
             <input type="hidden" id="address" name="address" value="">
         </form>
-
+        </div>
+        
+        <div class="content4_grid">
         <div id='map'></div>
         <div id="geocoder" class="geocoder"></div>
         <script>
@@ -84,9 +86,9 @@
             // Add the control to the map.
                 const geocoder = new MapboxGeocoder({
                 accessToken: mapboxgl.accessToken,
-                collapsed: true,
                 language: 'ja',
                 types: 'poi',
+                limit: 10,
                 mapboxgl: mapboxgl
                 });
 

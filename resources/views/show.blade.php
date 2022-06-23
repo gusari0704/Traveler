@@ -18,15 +18,27 @@
                 <div id='map'></div>
     </div>
     <div class="content3_grid">
+        <!--ブックマーク-->
+         @if($data->isFavoritedBy(Auth::user()))
+         <a href="/{{ $data->id }}/favorite" class="btn samazon-favorite-button text-favorite w-100">
+             <i class="fa fa-heart"></i>
+             お気に入り解除
+         </a>
+         @else
+         <a href="/{{ $data->id }}/favorite" class="btn samazon-favorite-button text-favorite w-100">
+             <i class="fa fa-heart"></i>
+             お気に入り
+         </a>
+         @endif
         <p class="created">{{ $data->created_at }}</p>
         <h2>{{ $data->title }}</h2>
         <hr>
         <p style="font-size:15px; margin-bottom:50px;">{!! nl2br($data->main)!!}</p>
+
         <!--投稿へのコメント一覧-->
         @foreach($coments as $coment)
         <div class="content">
         <hr>
-
         <p>{{ $coment->text }}</p>
         </div>
         @if($user_id == $coment->user_id)
@@ -47,7 +59,7 @@
         <form action="/comentform" method="post">
             @csrf
             <p>&nbsp;</p>
-            <textarea name="text" cols="40" rows="3" value={{old('text')}} type="text" placeholder="コメントを入力"></textarea>
+            <textarea name="text" cols="35" rows="3" value={{old('text')}} type="text" placeholder="コメントを入力"></textarea>
             @error('text')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
@@ -58,21 +70,6 @@
         </form>
     </div>
 </main>
-    <hr>
-    <!--ブックマーク-->
-     @if($data->isFavoritedBy(Auth::user()))
-     <a href="/{{ $data->id }}/favorite" class="btn samazon-favorite-button text-favorite w-100">
-         <i class="fa fa-heart"></i>
-         お気に入り解除
-     </a>
-     @else
-     <a href="/{{ $data->id }}/favorite" class="btn samazon-favorite-button text-favorite w-100">
-         <i class="fa fa-heart"></i>
-         お気に入り
-     </a>
-     @endif
-    <hr>
-    
         <!--写真の位置情報-->
         <script>
             $(function(){

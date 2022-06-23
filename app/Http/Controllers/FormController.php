@@ -59,7 +59,8 @@ class FormController extends Controller
 
         if(!empty($keyword)) {
             $query->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('main', 'LIKE', "%{$keyword}%"); /*タイトル・本文部分一致*/
+                ->orWhere('main', 'LIKE', "%{$keyword}%")
+                ->orWhere('spot_name', 'LIKE', "%{$keyword}%");/*タイトル・本文・タグ部分一致*/
         }
 
         $data = $query->get();
@@ -82,8 +83,7 @@ class FormController extends Controller
          if ($user->hasFavorited($form)) {
              $user->unfavorite($form);
          } else {
-            // $user->favorite($form);
-            $user->unfavorite($form);
+             $user->favorite($form);
          }
  
          return redirect()->route('form.show', ['id' => $form->id]); 
@@ -100,11 +100,7 @@ class FormController extends Controller
 
         $data = Form::where('id', $id)->first();
         
-        $query = Bookmark::query();
-        $query->where('form_id', '=', $id);
-        $favorites = $query->get();
-        
-        return view('show')->with(['data'=>$data, 'coments'=>$coments, 'user_id'=>Auth::id(), 'favorites'=>$favorites ]);
+        return view('show')->with(['data'=>$data, 'coments'=>$coments, 'user_id'=>Auth::id() ]);
     }
     
     public function destroy($id)
