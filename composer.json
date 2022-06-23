@@ -29,6 +29,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
+        "bin-dir": "vender/bin",
         "sort-packages": true
     },
     "extra": {
