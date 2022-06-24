@@ -66,14 +66,6 @@ class FormController extends Controller
         $data = $query->get();
 
         return view('web.index', compact('data', 'keyword'));
-        
-        /*Form::all(); が、データベースへの問い合わせ文(クエリ)
-        並び順(orderBy)を投稿日(created_at)の降順(desc)にして全て取得(get)*/
-        $data = Form::orderBy('created_at', 'desc')->get(); 
-     
-        /*return view の所でindex.blade.phpが表示されるように指定し、
-          index.bladeに$dataを渡すために、->with(['data' => $data])*/
-        return view('web.index')->with(['data' => $data]);
     }
     
      public function favorite(Form $form)

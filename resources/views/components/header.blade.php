@@ -1,6 +1,6 @@
 <nav style="position:fixed; z-index: 999; width:100%; left:0; right:0;" class="navbar navbar-expand-md navbar-light shadow-sm samazon-header-container">
     <a class="navbar-brand ml-2" href="{{ url('/') }}">
-        {{ config('app.name', 'Traveler') }}
+        {{ config('app.name', 'Photravel') }}
     </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">

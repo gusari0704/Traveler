@@ -1,0 +1,95 @@
+                // When a click event occurs on a feature in the places layer, open a popup at the
+                // location of the feature, with description HTML from its properties.
+                map.on('click', 'places', (e) => {
+                    // Copy coordinates array.
+                        const coordinates = e.features[0].geometry.coordinates.slice();
+                        const description = e.features[0].properties.description;
+                     
+                    // Ensure that if the map is zoomed out such that multiple
+                    // copies of the feature are visible, the popup appears
+                    // over the copy being pointed to.
+                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                    }
+                    new mapboxgl.Popup()
+                        .setLngLat(coordinates)
+                        .setHTML(description)
+                        .addTo(map);
+                });
+                 
+                // Change the cursor to a pointer when the mouse is over the places layer.
+                    map.on('mouseenter', 'places', () => {
+                        map.getCanvas().style.cursor = 'pointer';
+                    });
+                 
+                // Change it back to a pointer when it leaves.
+                    map.on('mouseleave', 'places', () => {
+                        map.getCanvas().style.cursor = '';
+                        });
+                        
+                // クリックしたポイントの中央にマップを配置
+                // Center the map on the coordinates of any clicked circle from the 'circle' layer.
+                    map.on('click', 'places', (e) => {
+                        map.flyTo({
+                        center: e.features[0].geometry.coordinates
+                    });
+                });
+                // Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+                    map.on('mouseenter', 'places', () => {
+                        map.getCanvas().style.cursor = 'pointer';
+                });
+                // Change it back to a pointer when it leaves.
+                    map.on('mouseleave', 'places', () => {
+                        map.getCanvas().style.cursor = '';
+                    });
+                });
+                
+                
+              mapboxgl.accessToken = 'pk.eyJ1IjoiZ3VzYXJpIiwiYSI6ImNsM3lpMTk3cjNmZnEza2w4OWw5OXBrMzYifQ.DBDiekWcs1_ccUjJg9cGEQ';
+              const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/gusari/cl48qv04o000015o60xusz3pz', // マップのスタイル（デザイン）
+                center: [139.69167, 35.68944], // 初期に表示する地図の緯度経度 [経度、緯度]
+                zoom: 4.5 // 初期に表示する地図のズームレベル
+              });
+                map.on('load', () => {
+                    map.addSource('places', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': features
+                        }
+                    });
+
+                // Add a layer showing the places.
+                    map.addLayer({
+                        'id': 'places',
+                        'type': 'circle',
+                        'source': 'places',
+                        'paint': {
+                            'circle-color': '#4264fb',
+                            'circle-radius': 6,
+                            'circle-stroke-width': 1,
+                            'circle-stroke-color': '#ffffff'
+                        }
+                    });
+                map.addControl(new mapboxgl.NavigationControl());
+            });
+            
+                var features = [
+                    @foreach($data as $datas)
+                    {
+                        'type': 'Feature',
+                        'properties': {
+                            'description':
+                            '<p>{{ $datas->title }}</p>'
+                        },
+                        'geometry': {
+                            'type': 'MultiPoint',
+                            'coordinates': [
+                                [{{ $datas->lon }}, {{ $datas->lat }}]
+                            ]
+                        }
+                    },
+                    @endforeach
+                ];

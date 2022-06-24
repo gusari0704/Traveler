@@ -81,15 +81,7 @@
                 zoom: 14 // 初期に表示する地図のズームレベル
               });
               
-            // Add the control to the map.
-                const geocoder = new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                collapsed: true,
-                language: 'ja',
-                types: 'poi',
-                mapboxgl: mapboxgl
-                });
-                
+
                 map.on('load', function () {
                 // マーカー追加
                 const Marker = new mapboxgl.Marker({
@@ -99,15 +91,10 @@
                 .setLngLat([{{ $data->lon }}, {{ $data->lat }}])
                 .addTo(map);
                 });
-                
-                // ポップアップ
-                const popup = new mapboxgl.Popup({ closeOnClick: false })
-                .setLngLat([{{ $data->lon }}, {{ $data->lat }}])
-                .setHTML('{!! nl2br($data->main)!!}')
-                .addTo(map);
 
                 // コントロール関係表示
                 map.addControl(new mapboxgl.NavigationControl());
+                map.addControl(new mapboxgl.FullscreenControl());
             });
             
         </script>
@@ -118,6 +105,12 @@
 <a href="https://twitter.com/intent/tweet?url=【共有するURL】&hashtags=【ハッシュタグ（複数あるときはカンマ区切り）】" rel="nofollow" target="blank_">
   Twiiterでシェアする
 </a>
+                // ポップアップ
+                const popup = new mapboxgl.Popup({ closeOnClick: false })
+                .setLngLat([{{ $data->lon }}, {{ $data->lat }}])
+                .setHTML('{!! nl2br($data->main)!!}')
+                .addTo(map);
 -->
 
 @endsection
+

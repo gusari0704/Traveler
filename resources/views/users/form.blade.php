@@ -34,7 +34,10 @@
 
             <p>&nbsp;</p>
             <textarea name="spot_name" cols="30" rows="1" value="" type="text" placeholder="名称・地名（例：東京博物館）" value={{old('spot_name')}}></textarea>
-
+            @error('spot_name')
+            <p class="perror"><span style="color:red;">{{ $message }}</span></p>
+            @enderror
+            
             <p>
             Preview:<br>
             <canvas id="preview" style="max-width:150px; max-height:200px;"></canvas>
@@ -64,6 +67,13 @@
             <input class="btn btn-outline-primary" type="submit" class="submitbtn">
             
             <input type="hidden" id="lat" name="lat" value="">
+            @error('lat')
+            @error('lon')
+            @error('address')
+            <p class="perror"><span style="color:red;">{{ $message }}</span></p>
+            @enderror
+            @enderror
+            @enderror
             <input type="hidden" id="lon" name="lon" value="">
             <input type="hidden" id="address" name="address" value="">
         </form>
