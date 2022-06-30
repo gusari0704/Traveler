@@ -51,7 +51,6 @@ $(function(){
                 'features': features
             }
         });
-
         // Add a layer showing the places.
         map.addLayer({
             'id': 'places',
@@ -64,7 +63,6 @@ $(function(){
                 'circle-stroke-color': '#ffffff'
             }
         });
-
         map.addControl(new mapboxgl.NavigationControl());
     });
     // When a click event occurs on a feature in the places layer, open a popup at the
