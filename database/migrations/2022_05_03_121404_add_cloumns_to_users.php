@@ -15,9 +15,9 @@ class AddCloumnsToUsers extends Migration
     {
         /* 新しくユーザーの住所などの情報を保存するカラム */
         Schema::table('users', function (Blueprint $table) {
-             $table->string('postal_code')->default(''); //郵便番号
-             $table->text('address')->default(''); //住所
-             $table->string('phone')->default(''); //電話番号
+             $table->string('postal_code'); //郵便番号
+             $table->text('address'); //住所
+             $table->string('phone'); //電話番号
         });
     }
 

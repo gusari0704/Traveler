@@ -16,8 +16,8 @@ class AddClumToFormsTable extends Migration
         Schema::table('forms', function (Blueprint $table) {
         //    $table->double('lat', 3, 10)->default(35.68944);
         //    $table->double('lon', 3, 10)->default(139.69167);
-            $table->string('address')->default('');
-            $table->string('spot_name')->default('');
+            $table->string('address');
+            $table->string('spot_name');
         });
     }
 

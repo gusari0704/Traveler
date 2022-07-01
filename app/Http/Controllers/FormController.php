@@ -59,8 +59,7 @@ class FormController extends Controller
 
         if(!empty($keyword)) {
             $query->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('main', 'LIKE', "%{$keyword}%")
-                ->orWhere('spot_name', 'LIKE', "%{$keyword}%");/*タイトル・本文・タグ部分一致*/
+                ->orWhere('spot_name', 'LIKE', "%{$keyword}%");/*タイトル・タグ部分一致*/
         }
 
         $data = $query->get();

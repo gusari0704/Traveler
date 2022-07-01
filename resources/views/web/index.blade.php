@@ -15,28 +15,25 @@
         </div>
     </div>
 </div>
-
 <div id='map' style="width:800px; height:450px;">
     <div class='sidebar'>
-        <div class='heading'>
-            <h1>Our locations</h1>
+        <div id='heading' class='heading'>
+            <pre id='heading' class='heading'></pre>
         </div>
         <pre id='listings' class='listings'>
         </pre>
     </div>
 </div>
-
 <!--写真の位置情報-->
 <script>
-
 $(function(){
     var features = [
         @foreach($data as $datas)
         {
             'type': 'Feature',
             'properties': {
-                'description': '<h5><strong>{{ $datas->title }}</strong></h5>',
-                'main': '<p>{{ $datas->main }}</p>'
+                'description': '<div class="textlinks textlink03"><a href="/show/{{ $datas->id }}"><p class="overflow-ellipsis-title">{{ $datas->title }}</p></a></div>',
+                'main': '<p class="overflow-ellipsis-map">'+'#'+'{{ $datas->spot_name }}<br>{{ $datas->created_at }}</p>'
             },
             'geometry': {
                 'type': 'MultiPoint',
@@ -51,10 +48,9 @@ $(function(){
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/gusari/cl48qv04o000015o60xusz3pz', // マップのスタイル（デザイン）
-        center: [139.69167, 35.68944], // 初期に表示する地図の緯度経度 [経度、緯度]
-        zoom: 4.5 // 初期に表示する地図のズームレベル
+        center: [134.69167, 37.68944], // 初期に表示する地図の緯度経度 [経度、緯度]
+        zoom: 4 // 初期に表示する地図のズームレベル
     });
-
     map.on('load', () => {
         map.addSource('places', {
             'type': 'geojson',
@@ -63,8 +59,6 @@ $(function(){
                 'features': features
             }
         });
-        
-        // Add a layer showing the places.
         map.addLayer({
             'id': 'places',
             'type': 'circle',
@@ -76,29 +70,27 @@ $(function(){
                 'circle-stroke-color': '#ffffff'
             }
         });
-
-        map.addControl(new mapboxgl.NavigationControl());
     });
 
     map.on('click', 'places', (e) => {
-
-        
         //クリックしたサークルに飛ぶ
         map.flyTo({
             center: e.features[0].geometry.coordinates
         });
-
         const coordinates = e.features[0].geometry.coordinates.slice();
         const description = e.features[0].properties.description;
-
-
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
-
-        document.getElementById('listings').innerHTML = 
-            JSON.stringify(e.lngLat.wrap());
-
+        var search = "";
+        var x;
+        for (x in e.features) {
+        　search += e.features[x].properties.description + e.features[x].properties.main;
+        }
+        document.getElementById("listings").innerHTML = search;
+        let searchCount = search.length;
+        document.getElementById("heading").innerHTML = console.log(searchCount);
+        
         // クリックしたサークル（円）をマップの中央に配置する
         map.on('mouseenter', 'circle', () => {
             map.getCanvas().style.cursor = 'pointer';
@@ -106,8 +98,9 @@ $(function(){
         map.on('mouseleave', 'circle', () => {
             map.getCanvas().style.cursor = '';
         });
-
     });
+        map.addControl(new mapboxgl.NavigationControl());
+        map.addControl(new mapboxgl.FullscreenControl());
 });
 </script>
 <hr>

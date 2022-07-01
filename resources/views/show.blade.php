@@ -80,8 +80,6 @@
                 center: [{{ $data->lon }}, {{ $data->lat }}], // 初期に表示する地図の緯度経度 [経度、緯度]
                 zoom: 14 // 初期に表示する地図のズームレベル
               });
-              
-
                 map.on('load', function () {
                 // マーカー追加
                 const Marker = new mapboxgl.Marker({
@@ -91,12 +89,10 @@
                 .setLngLat([{{ $data->lon }}, {{ $data->lat }}])
                 .addTo(map);
                 });
-
                 // コントロール関係表示
                 map.addControl(new mapboxgl.NavigationControl());
                 map.addControl(new mapboxgl.FullscreenControl());
             });
-            
         </script>
         
 
