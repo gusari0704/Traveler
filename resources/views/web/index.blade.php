@@ -15,6 +15,17 @@
         </div>
     </div>
 </div>
+
+<div id='map' style="width:800px; height:450px;">
+    <div class='sidebar'>
+        <div class='heading'>
+            <h1>Our locations</h1>
+        </div>
+        <pre id='listings' class='listings'>
+        </pre>
+    </div>
+</div>
+
 <!--写真の位置情報-->
 <script>
 
@@ -24,8 +35,8 @@ $(function(){
         {
             'type': 'Feature',
             'properties': {
-                'description':
-                '<p>{{ $datas->title }}</p>'
+                'description': '<h5><strong>{{ $datas->title }}</strong></h5>',
+                'main': '<p>{{ $datas->main }}</p>'
             },
             'geometry': {
                 'type': 'MultiPoint',
@@ -43,6 +54,7 @@ $(function(){
         center: [139.69167, 35.68944], // 初期に表示する地図の緯度経度 [経度、緯度]
         zoom: 4.5 // 初期に表示する地図のズームレベル
     });
+
     map.on('load', () => {
         map.addSource('places', {
             'type': 'geojson',
@@ -51,6 +63,7 @@ $(function(){
                 'features': features
             }
         });
+        
         // Add a layer showing the places.
         map.addLayer({
             'id': 'places',
@@ -63,30 +76,40 @@ $(function(){
                 'circle-stroke-color': '#ffffff'
             }
         });
+
         map.addControl(new mapboxgl.NavigationControl());
     });
-    // When a click event occurs on a feature in the places layer, open a popup at the
-    // location of the feature, with description HTML from its properties.
+
     map.on('click', 'places', (e) => {
-        // Copy coordinates array.
-            const coordinates = e.features[0].geometry.coordinates.slice();
-            const description = e.features[0].properties.description;
-         
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
+
+        
+        //クリックしたサークルに飛ぶ
+        map.flyTo({
+            center: e.features[0].geometry.coordinates
+        });
+
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = e.features[0].properties.description;
+
+
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
+
+        document.getElementById('listings').innerHTML = 
+            JSON.stringify(e.lngLat.wrap());
+
+        // クリックしたサークル（円）をマップの中央に配置する
+        map.on('mouseenter', 'circle', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'circle', () => {
+            map.getCanvas().style.cursor = '';
+        });
+
     });
 });
 </script>
-<div id='map' style="width:800px; height:450px;"></div>
-
 <hr>
 <div class="form_container">
     @foreach($data as $datas)

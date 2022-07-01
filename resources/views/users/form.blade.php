@@ -21,7 +21,7 @@
         <!--投稿フォーム-->
         <form action="/newpostsend" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="text" cols="30" name="title" class="formtitle" placeholder="タイトル" value={{old('title')}}>
+            <input type="text" cols="30" name="title" class="formtitle" placeholder="タイトル（必須）" value={{old('title')}}>
             @error('title')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
@@ -33,7 +33,7 @@
             @enderror
 
             <p>&nbsp;</p>
-            <textarea name="spot_name" cols="30" rows="1" value="" type="text" placeholder="名称・地名（例：東京博物館）" value={{old('spot_name')}}></textarea>
+            <textarea name="spot_name" cols="30" rows="1" value="" type="text" placeholder="名称・地名（必須）" value={{old('spot_name')}}></textarea>
             @error('spot_name')
             <p class="perror"><span style="color:red;">{{ $message }}</span></p>
             @enderror
