@@ -41,13 +41,16 @@ class FormController extends Controller
             || $request->post_img->extension() == 'jpg' 
             || $request->post_img->extension() == 'png')
             {
-                
+            
+            $file = $request->file('post_img');
+            $path = Storage::disk('s3')->putFileAs('/', $file, 'images', 'public');
             // 投稿された時のみ、画像以外の拡張子の場合は保存しない
-            $request->file('post_img')
-            ->storeAs('public/post_img', $post->id.'.'.$request->post_img->extension());
+            //$request->file('post_img')
+            //->storeAs('public/post_img', $post->id.'.'.$request->post_img->extension());
             }
         }
-        return view('users.form'); /*元の投稿フォームのページにリダイレクト*/
+        return redirect('/');
+        //return view('users.form'); /*元の投稿フォームのページにリダイレクト*/
     }
     
     /*検索機能*/
@@ -63,8 +66,10 @@ class FormController extends Controller
         }
 
         $data = $query->get();
+        
+        $path = Storage::disk('s3')->url('images');
 
-        return view('web.index', compact('data', 'keyword'));
+        return view('web.index', compact('data', 'keyword', 'images'));
     }
     
      public function favorite(Form $form)

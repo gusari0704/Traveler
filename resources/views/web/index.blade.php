@@ -107,14 +107,14 @@ $(function(){
 <div class="form_container">
     @foreach($data as $datas)
     <!--もしpublic path(画像の一般公開用URL)に この記事のid番号.jpg が存在するなら、それを表示する-->
-        @if(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpg'))
-            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.jpg"></a></div>
-        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.jpeg'))
-            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.jpeg"></a></div>
-        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.png'))
-            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.png"></a></div>
-        @elseif(file_exists(public_path().'/storage/post_img/'. $datas->id .'.gif'))
-            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="/storage/post_img/{{ $datas->id }}.gif"></a></div>
+        @if(file_exists(public_path().'{{$images}}'. $datas->id .'.jpg'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="{{$images}}.{{ $datas->id }}.jpg"></a></div>
+        @elseif(file_exists(public_path().'{{$images}}'. $datas->id .'.jpeg'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="{{$images}}.{{ $datas->id }}.jpeg"></a></div>
+        @elseif(file_exists(public_path().'{{$images}}'. $datas->id .'.png'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="{{$images}}.{{ $datas->id }}.png"></a></div>
+        @elseif(file_exists(public_path().'{{$images}}'. $datas->id .'.gif'))
+            <div class="form_img"><a href="/show/{{ $datas->id }}"><img src="{{$images}}.{{ $datas->id }}.gif"></a></div>
         @endif
         @endforeach
 </div>
